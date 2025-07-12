@@ -2,239 +2,216 @@
 
 Hey there, and welcome to the backend for **Opiniona**!
 
-This project is a complete, robust RESTful API built with **Django** and **Django REST Framework**. It provides all the necessary functionality for a product review platform, allowing admins to manage products and users to submit reviews. It's built with best practices in mind, including a secure authentication system, role-based permissions, and a clean, test-driven architecture.
+This project is a complete, robust RESTful API built with Django and Django REST Framework. It provides all the necessary functionality for a product review platform, allowing admins to manage products and users to submit reviews. It's built with best practices in mind, including a secure authentication system, role-based permissions, and a clean, test-driven architecture.
 
 So grab a coffee, and let's get you set up!
 
----
-
 ## ✨ Core Features
 
-- 👤 **Full User Authentication**: Secure registration, login (token-based), and logout endpoints.
-- 👮 **Role-Based Permissions**: Admins manage products, regular users write reviews.
-- 📦 **Complete Product Management**: Admins can create, list, update, and delete products.
-- 🖼️ **Optional Image Uploads**: Admins can upload multiple images per product.
-- ⭐ **Review System**: Authenticated users can post a rating (1–5) and written feedback.
-- 🛡️ **Duplicate Prevention**: A user can only review each product once.
-- 📊 **Rating Aggregation**: Products display the average rating from all reviews.
-- ✅ **Fully Tested**: Includes a comprehensive test suite.
-
----
+*   👤 **Full User Authentication**: Secure registration, login (token-based), and logout endpoints.
+*   👮 **Role-Based Permissions**: A clear distinction between **Admin Users** (who manage products) and **Regular Users** (who write reviews).
+*   📦 **Complete Product Management**: Admins can create, list, view details of, update, and delete products.
+*   🖼️ **Optional Image Uploads**: Admins can upload multiple images for each product.
+*   ⭐️ **Review System**: Authenticated users can post a rating (1-5) and written feedback for any product.
+*   🛡️ **Duplicate Prevention**: A user can only review any given product once.
+*   📊 **Rating Aggregation**: Product listings automatically calculate and display the average rating from all submitted reviews.
+*   ✅ **Fully Tested**: Comes with a comprehensive test suite to ensure the API is reliable and bug-free.
 
 ## 🛠️ Technology Stack
 
-- **Backend**: Python 3, Django
-- **API Framework**: Django REST Framework
-- **Authentication**: DRF Token Authentication
-- **Database**: SQLite 3
-- **Image Handling**: Pillow
-
----
+*   **Backend**: Python 3, Django
+*   **API Framework**: Django REST Framework (DRF)
+*   **Authentication**: DRF Token Authentication
+*   **Database**: SQLite 3 (for ease of setup and development)
+*   **Image Handling**: Pillow
 
 ## 🏛️ System Architecture (ER Diagram)
 
-Here’s a simple Entity-Relationship (ER) diagram showing how the data is organized:
+To give you a clear picture of how the data is organized, here’s a simple Entity-Relationship diagram. It shows our three main models, **User**, **Product**, and **Review**, and our helper model for images, **ProductImage**.
 
-- A `Product` can have many `Reviews`
-- A `User` can write many `Reviews`
-- A `Product` can have many `ProductImages`
+The key relationships are:
+*   A **Product** can have many **Reviews**.
+*   A **User** can write many **Reviews**.
+*   A **Product** can have many **ProductImages**.
 
 ![ER Diagram](docs/ER_Diagram.png)
 
----
-
 ## 🚀 Getting Started: Setup and Installation
 
-### 1. Clone the Repository
+Follow these steps precisely, and you'll have a local development server running in just a few minutes.
 
-```bash
-git clone https://github.com/a-s-l-a-h/Opiniona-Backend.git
-cd Opiniona-Backend
-2. Create and Activate a Virtual Environment
-On Windows (PowerShell):
-bash
-Copy
-Edit
-python -m venv venv
-.\venv\Scripts\Activate
-On macOS / Linux:
-bash
-Copy
-Edit
-python3 -m venv venv
-source venv/bin/activate
-3. Install Dependencies
-bash
-Copy
-Edit
-pip install -r requirements.txt
-4. Set Up the Database
-bash
-Copy
-Edit
-python manage.py migrate
-5. Create an Admin User
-bash
-Copy
-Edit
-python manage.py createsuperuser
-▶️ Running the Application
-bash
-Copy
-Edit
-python manage.py runserver
-Your API will be live at: http://127.0.0.1:8000/
+#### 1. Clone the Repository
+First things first, get the code onto your local machine.
 
-✅ Running the Tests
-bash
-Copy
-Edit
-python manage.py test
-Or test specific apps:
+    git clone <your-repository-url>
+    cd Opiniona-Backend
 
-bash
-Copy
-Edit
-python manage.py test products
-python manage.py test reviews
-📖 API Endpoints Documentation
-🔐 Authentication (/api/accounts/)
-1. Register
-http
-Copy
-Edit
-POST /api/accounts/register/
-json
-Copy
-Edit
-{
-  "username": "newuser",
-  "email": "newuser@example.com",
-  "password": "a-strong-password",
-  "password2": "a-strong-password"
-}
-2. Login
-http
-Copy
-Edit
-POST /api/accounts/login/
-json
-Copy
-Edit
-{
-  "username": "someuser",
-  "password": "their-password"
-}
-Response:
+#### 2. Create and Activate a Virtual Environment
+It's super important to keep your project's dependencies isolated.
 
-json
-Copy
-Edit
-{
-  "token": "a1b2c3...",
-  "user_id": 5,
-  "is_staff": false
-}
-3. Logout
-http
-Copy
-Edit
-POST /api/accounts/logout/
-Token required.
+*   **On Windows (PowerShell):**
 
-📦 Products (/api/products/)
-1. List Products
-http
-Copy
-Edit
-GET /api/products/
-2. Create a Product (Admin only)
-http
-Copy
-Edit
-POST /api/products/
-json
-Copy
-Edit
-{
-  "name": "Cool Mechanical Keyboard",
-  "description": "A keyboard with satisfyingly clicky keys.",
-  "price": "149.99"
-}
-3. View/Update/Delete Product
-http
-Copy
-Edit
-GET /api/products/<id>/
-PUT /api/products/<id>/
-DELETE /api/products/<id>/
-4. Upload Image
-http
-Copy
-Edit
-POST /api/products/<product_id>/upload-image/
-Use multipart/form-data
+        python -m venv venv
+        .\venv\Scripts\Activate
 
-Key: image
+*   **On macOS / Linux:**
 
-Value: image file
+        python3 -m venv venv
+        source venv/bin/activate
 
-⭐ Reviews (/api/products/<product_id>/reviews/)
-1. List Reviews
-http
-Copy
-Edit
-GET /api/products/<product_id>/reviews/
-2. Submit a Review
-http
-Copy
-Edit
-POST /api/products/<product_id>/reviews/
-json
-Copy
-Edit
-{
-  "rating": 5,
-  "feedback": "This product was fantastic!"
-}
-🧪 Safe Points (Branching)
-To save your current working state to a versioned branch:
+You'll know it worked if you see **(venv)** at the start of your terminal prompt.
 
-bash
-Copy
-Edit
-# Make sure all changes are committed
-git add .
-git commit -m "version 0.1"
+#### 3. Install Dependencies
+All required packages are listed in the **requirements.txt** file. Install them all with this single command:
 
-# Create and switch to a new branch
-git checkout -b version_0.1
+    pip install -r requirements.txt
 
-# Push the new branch to GitHub
-git push -u origin version_0.1
+#### 4. Set Up the Database
+This command will create your **db.sqlite3** file and set up all the necessary tables based on our models.
 
-# Optional: Tag the version
-git tag version_0.1
-git push origin version_0.1
-📁 Folder Structure Note
-Project documentation, including diagrams, should be placed inside a folder named:
+    python manage.py migrate
 
-Copy
-Edit
-docs/
-Example:
+#### 5. Create Your First Admin User
+You need an admin account to be able to add products. This command will prompt you to create one.
 
-bash
-Copy
-Edit
-docs/ER_Diagram.png
-docs/api_reference.md
-That’s it! You’re ready to build, test, and scale Opiniona.
+    python manage.py createsuperuser
 
-yaml
-Copy
-Edit
+Choose a username, email, and a strong password. This user will have **is_staff=True** automatically.
+
+## ▶️ Running the Application
+
+With the setup complete, starting the server is a one-line command:
+
+    python manage.py runserver
+
+Your API is now live and accessible at **http://127.0.0.1:8000/**.
+
+## ✅ Running the Tests
+
+We have a full suite of tests to make sure everything is working as expected. To run them, use the **test** command.
+
+    python manage.py test
+
+If everything is set up correctly, you'll see a lot of dots and a final **OK** message. This is your guarantee that the core logic is solid.
+
+You can also test a single app to save time:
+
+    # Test only the product-related endpoints
+    python manage.py test products
+
+    # Test only the review-related endpoints
+    python manage.py test reviews
+
+## 📖 API Endpoints Documentation
+
+Here is a full guide to all available API endpoints.
+
+---
+### Authentication (/api/accounts/)
+
+
+**1. Register a New User**
+*   **Endpoint**: POST /api/accounts/register/
+*   **Description**: Creates a new regular user account.
+*   **Authentication**: Not required.
+*   **Request Body**:
+
+        {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "a-strong-password",
+            "password2": "a-strong-password"
+        }
+
+*   **Success Response**: 201 Created
+
+**2. Log In**
+*   **Endpoint**: POST /api/accounts/login/
+*   **Description**: Authenticates a user and returns their auth token.
+*   **Authentication**: Not required.
+*   **Request Body**:
+
+        {
+            "username": "someuser",
+            "password": "their-password"
+        }
+
+*   **Success Response**: 200 OK with the user's token and staff status.
+
+        {
+            "token": "a1b2c3d4e5f6...",
+            "user_id": 5,
+            "is_staff": false
+        }
+
+**3. Log Out**
+*   **Endpoint**: POST /api/accounts/logout/
+*   **Description**: Deletes the user's current token, requiring them to log in again.
+*   **Authentication**: **User Token Required**.
+
+---
+### Products (/api/products/)
+
+
+**1. List All Products**
+*   **Endpoint**: GET /api/products/
+*   **Description**: Retrieves a list of all products for anyone to browse.
+*   **Authentication**: Not required.
+*   **Success Response**: 200 OK with a list of products.
+
+**2. Create a New Product**
+*   **Endpoint**: POST /api/products/
+*   **Description**: Adds a new product to the catalog.
+*   **Authentication**: **Admin Token Required**.
+*   **Request Body**:
+
+        {
+            "name": "Cool Mechanical Keyboard",
+            "description": "A keyboard with satisfyingly clicky keys.",
+            "price": "149.99"
+        }
+
+*   **Success Response**: 201 Created
+
+**3. View, Update, or Delete a Single Product**
+*   **Endpoint**: GET, PUT, PATCH, DELETE /api/products/<id>/
+*   **Description**:
+    *   GET: View the full details of one product. (No auth needed)
+    *   PUT/PATCH: Update a product's details. (**Admin Token Required**)
+    *   DELETE: Remove a product from the catalog. (**Admin Token Required**)
+*   **Authentication**: See description.
+
+**4. Upload an Image for a Product**
+*   **Endpoint**: POST /api/products/<product_id>/upload-image/
+*   **Description**: Adds an optional image to an existing product.
+*   **Authentication**: **Admin Token Required**.
+*   **Request Body**: This must be a **multipart/form-data** request, not JSON. The key should be **image** and the value should be the image file.
+
+---
+### Reviews (/api/products/<product_id>/reviews/)
+
+
+**1. List Reviews for a Product**
+*   **Endpoint**: GET /api/products/<product_id>/reviews/
+*   **Description**: Retrieves all reviews submitted for a specific product.
+*   **Authentication**: Not required.
+*   **Success Response**: 200 OK with a list of reviews.
+
+**2. Submit a Review for a Product**
+*   **Endpoint**: POST /api/products/<product_id>/reviews/
+*   **Description**: Allows a logged-in user to post a review.
+*   **Authentication**: **User Token Required** (regular or admin).
+*   **Request Body**:
+
+        {
+            "rating": 5,
+            "feedback": "This product was absolutely fantastic! Would buy again."
+        }
+
+*   **Success Response**: 201 Created
 
 ---
 
-Let me know if you’d like this also exported to a Markdown file or auto-linked with version badges.
+That's it! You should now have everything you need to run, test, and understand the Opiniona API.
+
+Happy coding! 🚀
