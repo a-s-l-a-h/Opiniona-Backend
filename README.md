@@ -66,17 +66,28 @@ All required packages are listed in the **requirements.txt** file. Install them 
 
     pip install -r requirements.txt
 
-#### 4. Set Up the Database
+#### 4. Environment Variables Setup
+*   **Create .env file**
+
+        SECRET_KEY=your-secret-key
+        DEBUG=True
+        
+
+- Have .env → Use .env values
+- No .env → Use defaults in settings.py (for quick setup)
+
+#### 5. Set Up the Database
 This command will create your **db.sqlite3** file and set up all the necessary tables based on our models.
 
     python manage.py migrate
 
-#### 5. Create Your First Admin User
+#### 6. Create Your First Admin User
 You need an admin account to be able to add products. This command will prompt you to create one.
 
     python manage.py createsuperuser
 
 Choose a username, email, and a strong password. This user will have **is_staff=True** automatically.
+
 
 ## ▶️ Running the Application
 
@@ -211,6 +222,7 @@ Here is a full guide to all available API endpoints.
 *   **Success Response**: 201 Created
 
 ---
+
 
 That's it! You should now have everything you need to run, test, and understand the Opiniona API.
 

@@ -19,11 +19,32 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+
+
+# This part will help to load if env present SECRET_KEY from it. if not go with default one specified in settings.py
+
+try:
+    from dotenv import dotenv_values
+    env_vars = dotenv_values(BASE_DIR / ".env")
+except ImportError:
+    env_vars = {}
+
+
+SECRET_KEY = env_vars.get('SECRET_KEY', 'django-insecure-5c#!p=e^v)%4plopn*tz5vo)0jx$!hv*l%ywe7f_jz^4kd2ms*')
+
+DEBUG = env_vars.get('DEBUG', 'True') == 'True'
+
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5c#!p=e^v)%4plopn*tz5vo)0jx$!hv*l%ywe7f_jz^4kd2ms*'
+
+# 
+#SECRET_KEY = 'django-insecure-5c#!p=e^v)%4plopn*tz5vo)0jx$!hv*l%ywe7f_jz^4kd2ms*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+
+#DEBUG = True
 
 ALLOWED_HOSTS = []
 
