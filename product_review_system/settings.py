@@ -61,6 +61,7 @@ INSTALLED_APPS = [
      # 3rd-party apps
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     # Local apps
     'accounts.apps.AccountsConfig',
     'products.apps.ProductsConfig',
@@ -75,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'product_review_system.urls'
@@ -96,6 +98,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'product_review_system.wsgi.application'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173", # The default Vite dev server URL
+    "http://127.0.0.1:5173",
+]
 
 
 # Database

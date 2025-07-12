@@ -1,10 +1,11 @@
 from rest_framework import generics, permissions, status
 from rest_framework.exceptions import NotFound
-from .models import Product
+from .models import Product , ProductImage
 from .serializers import (
     ProductListSerializer,
     ProductDetailSerializer,
-    ProductImageUploadSerializer
+    ProductImageUploadSerializer,
+    ProductImageSerializer 
 )
 from .permissions import IsAdminOrReadOnly
 
@@ -29,3 +30,12 @@ class ProductImageUploadView(generics.CreateAPIView):
         except Product.DoesNotExist:
             raise NotFound("A product with this ID does not exist.")
         serializer.save(product=product)
+
+class ProductImageDetailView(generics.RetrieveDestroyAPIView):
+    """
+    View for an admin to retrieve or delete a specific product image.
+    This is the new view we added.
+    """
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageSerializer
+    permission_classes = [permissions.IsAdminUser]
