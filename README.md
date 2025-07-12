@@ -39,7 +39,7 @@ Here’s a simple Entity-Relationship (ER) diagram showing how the data is organ
 - A `User` can write many `Reviews`
 - A `Product` can have many `ProductImages`
 
-![ER Diagram](docs/ER Diagram.png)
+![ER Diagram](docs/ER_Diagram.png)
 
 ---
 
