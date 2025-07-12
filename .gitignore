@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.idea/
+
+# VS Code settings
+.vscode/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+media/
+staticfiles/
+
+# dotenv and config
+.env
+.env.*
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Requirements file lock (optional, if generated)
+poetry.lock
+Pipfile.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Migrations (optional, sometimes you might want these)
+*/migrations/__pycache__/
+*/migrations/*.py[cod]
